@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Button from '@components/Button/Button';
+import { Button } from '@components/Button';
 
 const Dashboard: NextPage = () => {
   return (
