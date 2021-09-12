@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { clientAuth } from '@firebase/client';
-import '../styles/globals.css';
-import { store } from '@state';
 import { Provider } from 'react-redux';
+import { clientAuth } from '@firebase/client';
+import { store } from '@state';
+import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
