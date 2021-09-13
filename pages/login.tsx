@@ -1,8 +1,10 @@
 import { useState, MouseEvent } from 'react';
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { loginWithGoogle, loginWithEmailAndPassword } from 'lib/auth';
+import { Input } from '@components/Input';
+import { Button } from '@components/Button';
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState('');
@@ -34,58 +36,31 @@ const Login: NextPage = () => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800">
         <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
           Hermes
         </h1>
 
         <form className="mt-6">
-          <div>
-            <label
-              htmlFor="username"
-              className="block text-sm text-gray-800 dark:text-gray-200"
-            >
-              Email
-            </label>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="text"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-            />
-          </div>
-
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            label="Email"
+            name="email"
+          />
           <div className="mt-4">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm text-gray-800 dark:text-gray-200"
-              >
-                Password
-              </label>
-              <Link href="/recover">
-                <a className="text-xs text-gray-600 dark:text-gray-400 hover:underline">
-                  Forget Password?
-                </a>
-              </Link>
-            </div>
-
-            <input
+            <Input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              label="Password"
             />
           </div>
 
           <div className="mt-6">
-            <button
-              onClick={handleLoginWithPasswordAndEmail}
-              className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-            >
-              Login
-            </button>
+            <Button onClick={handleLoginWithPasswordAndEmail}>Login</Button>
           </div>
         </form>
 
