@@ -6,7 +6,7 @@
       "@hooks/*": ["lib/components/*"],
       "@firebase/*": ["lib/firebase/*"],
       "@auth": ["lib/auth"],
-      "@state/*": ["lib/state/*"],
+      "@state": ["lib/state"],
       "@types": ["lib/types"]
     },
     "target": "es5",
