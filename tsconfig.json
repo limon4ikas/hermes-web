@@ -4,9 +4,10 @@
     "paths": {
       "@components/*": ["lib/components/*"],
       "@hooks/*": ["lib/components/*"],
-      "@firebase/client": ["lib/firebase"],
-      "@types": ["lib/types"],
-      "@state": ["lib/state"]
+      "@firebase/*": ["lib/firebase/*"],
+      "@auth": ["lib/auth"],
+      "@state/*": ["lib/state/*"],
+      "@types": ["lib/types"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,19 +1,45 @@
-import { User } from 'firebase/auth';
 import { createContext, FC, useEffect, useState } from 'react';
-import { clientAuth } from '../firebase/client';
+import { User } from 'firebase/auth';
+import { clientAuth } from '@firebase/client';
 
-export const AuthContext = createContext<User | null>(null);
+type AuthState = 'loading' | 'authenticated' | 'unauthenticated';
 
+interface AuthContext {
+  user: User | null;
+  authState: AuthState;
+}
+
+export const AuthContext = createContext<AuthContext>({
+  user: null,
+  authState: 'loading',
+});
+
+// TODO: Set id token cookie
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [authState, setAuthState] = useState<AuthState>('loading');
 
   useEffect(() => {
     const unsubscribe = clientAuth.onAuthStateChanged((user) => {
-      setUser(user);
+      if (user) {
+        setAuthState('authenticated');
+        setUser(user);
+      } else {
+        setAuthState('unauthenticated');
+      }
     });
 
     return () => unsubscribe();
   }, []);
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        authState: authState,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

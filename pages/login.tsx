@@ -42,7 +42,7 @@ const Login: NextPage = () => {
           Hermes
         </h1>
 
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={(e) => e.preventDefault()}>
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
