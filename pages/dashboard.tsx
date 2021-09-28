@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { withAuth, logout } from '@auth';
 
 // STRAVA
-// const redirectAfterAuthURL = 'http://localhost:3000/strava-sync';
+const redirectAfterAuthURL = 'http://localhost:3000/strava-sync';
 
 // const params = {
 //   client_id: process.env['NEXT_PUBLIC_STRAVA_CLIENT_ID'],
@@ -25,6 +25,7 @@ const Dashboard: NextPage = () => {
   return (
     <div>
       <button onClick={logout}>LOGOUT</button>
+      <a onClick={logout}>LOGOUT</a>
     </div>
   );
 };
