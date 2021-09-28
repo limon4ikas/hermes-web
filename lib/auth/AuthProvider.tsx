@@ -1,12 +1,18 @@
 import { createContext, FC, useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
 import { clientAuth } from '@firebase/client';
+import { getTokenCookie, setTokenCookie } from './utils';
 
-type AuthState = 'loading' | 'authenticated' | 'unauthenticated';
+type AuthState =
+  | 'init'
+  | 'loading'
+  | 'expect'
+  | 'authenticated'
+  | 'unauthenticated';
 
 interface AuthContext {
   user: User | null;
-  authState: AuthState;
+  authState: AuthState | null;
 }
 
 export const AuthContext = createContext<AuthContext>({
@@ -14,14 +20,17 @@ export const AuthContext = createContext<AuthContext>({
   authState: 'loading',
 });
 
-// TODO: Set id token cookie
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [authState, setAuthState] = useState<AuthState>('loading');
+  const [authState, setAuthState] = useState<AuthState | null>('init');
 
   useEffect(() => {
-    const unsubscribe = clientAuth.onAuthStateChanged((user) => {
+    getTokenCookie() ? setAuthState('expect') : setAuthState('loading');
+
+    const unsubscribe = clientAuth.onAuthStateChanged(async (user) => {
       if (user) {
+        const token = await user.getIdToken();
+        setTokenCookie(token);
         setAuthState('authenticated');
         setUser(user);
       } else {
@@ -29,7 +38,19 @@ export const AuthProvider: FC = ({ children }) => {
       }
     });
 
-    return () => unsubscribe();
+    const unsubscribeToken = clientAuth.onIdTokenChanged(async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        setTokenCookie(token);
+      } else {
+        setTokenCookie('');
+      }
+    });
+
+    return () => {
+      unsubscribeToken();
+      unsubscribe();
+    };
   }, []);
 
   return (
