@@ -57,6 +57,11 @@ const Login: NextPage = () => {
               type="password"
               label="Password"
             />
+            <Link href="/auth/forgot">
+              <a className="mt-2 flex justify-end text-xs font-light text-gray-400">
+                Forgout you password?
+              </a>
+            </Link>
           </div>
 
           <div className="mt-6">
@@ -90,7 +95,7 @@ const Login: NextPage = () => {
 
         <p className="mt-8 text-xs font-light text-center text-gray-400">
           Don&apos;t have an account? <br />
-          <Link href="/register">
+          <Link href="/auth/register">
             <a className="font-medium text-gray-800 dark:text-gray-200 hover:underline">
               Create One
             </a>

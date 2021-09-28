@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/login');
+    router.push('/auth/login');
   }, [router]);
 
   return <h1>HOME</h1>;
