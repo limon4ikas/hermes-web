@@ -17,7 +17,7 @@ export const withAuth = (config?: WithAuthConfig) => (Page: NextPage) => {
 
     // 2. Redirect to login path if user is not authenticated
     if (authState === 'unauthenticated') {
-      router.replace('/login');
+      router.replace('auth/login');
       return <h1>REDIRECTING...</h1>;
     }
 

@@ -1,1 +1,1 @@
-export * from './useFirebaseAuth';
+export const a = 1;
