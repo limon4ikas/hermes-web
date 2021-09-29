@@ -2,12 +2,17 @@ import { NextPage } from 'next';
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import { Button, Input } from '@components';
+import { sendPasswordResetMail } from 'lib/auth';
+import { useRouter } from 'next/router';
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
 });
 
+// TODO: #1 Display error if could not send email
 const Forgot: NextPage = () => {
+  const router = useRouter();
+
   return (
     <div className="flex h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -26,7 +31,14 @@ const Forgot: NextPage = () => {
               password: '',
               repeatedPassword: '',
             }}
-            onSubmit={async (values) => {}}
+            onSubmit={async (values) => {
+              try {
+                await sendPasswordResetMail(values.email);
+                router.push('/auth/login');
+              } catch (error) {
+                console.error(error);
+              }
+            }}
             validationSchema={ForgotPasswordSchema}
           >
             {({ isSubmitting }) => (

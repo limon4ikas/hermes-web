@@ -4,7 +4,6 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  confirmPasswordReset,
 } from 'firebase/auth';
 import { clientAuth, googleAuthProvider } from '@firebase/client';
 
@@ -26,11 +25,4 @@ export const logout = () => {
 
 export const sendPasswordResetMail = (email: string) => {
   return sendPasswordResetEmail(clientAuth, email);
-};
-
-export const changePasswordFromRest = (
-  confirmationCode: string,
-  newPassword: string
-) => {
-  return confirmPasswordReset(clientAuth, confirmationCode, newPassword);
 };

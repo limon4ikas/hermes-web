@@ -1,9 +1,24 @@
-import { Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
+import { Formik, Form } from 'formik';
 import { Input, InputProps } from './Input';
 
 export default {
   component: Input,
-  title: 'Input',
+  title: 'components/Input',
 } as Meta;
 
-export const Primary = () => <Input />;
+const Template: Story<InputProps> = (args) => (
+  <Formik
+    initialValues={{
+      email: '',
+    }}
+    onSubmit={(values) => {}}
+  >
+    <Form>
+      <Input {...args} />
+    </Form>
+  </Formik>
+);
+
+export const Primary = Template.bind({});
+Primary.args = { label: 'Email', name: 'email', placeholder: 'Email' };

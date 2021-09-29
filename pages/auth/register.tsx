@@ -17,6 +17,7 @@ const RegisterSchema = Yup.object().shape({
     .required('Required'),
 });
 
+// TODO: #2 Display error when could not create new user
 const Register: NextPage = () => {
   const router = useRouter();
 

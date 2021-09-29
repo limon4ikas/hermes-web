@@ -15,6 +15,7 @@ const LoginSchema = Yup.object().shape({
     .required('Required'),
 });
 
+// TODO: #3 Display error when could not authenticate user
 const Login: NextPage = () => {
   const router = useRouter();
 

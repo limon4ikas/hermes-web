@@ -4,7 +4,6 @@ import { useAuth } from './useAuth';
 
 interface WithAuthConfig {}
 
-// TODO: Add cookies to detect if user is authenticated (to not show unnecessary spinner)
 export const withAuth = (config?: WithAuthConfig) => (Page: NextPage) => {
   const WithAuth = (props: any) => {
     const { authState } = useAuth();
