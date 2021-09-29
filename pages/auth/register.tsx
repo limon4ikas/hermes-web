@@ -1,22 +1,28 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { NextPage } from 'next';
-import { createUser } from 'lib/auth';
 import { useRouter } from 'next/router';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { createUser } from 'lib/auth';
+import { Input, Button } from '@components';
+
+const RegisterSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string()
+    .min(8, 'Too short!')
+    .max(50, 'Too long!')
+    .required('Required'),
+  repeatedPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Required'),
+});
 
 const Register: NextPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleRegister = async () => {
-    try {
-      router.prefetch('/dashboard');
-      await createUser(email, password);
-      router.push('/dashboard');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  useEffect(() => {
+    router.prefetch('/dashboard');
+  }, [router]);
 
   return (
     <div className="flex h-screen items-center justify-center bg-gray-100">
@@ -30,39 +36,53 @@ const Register: NextPage = () => {
             Create account
           </p>
 
-          <form>
-            <div className="w-full mt-4">
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                type="email"
-                placeholder="Email Address"
-                aria-label="Email Address"
-              />
-            </div>
+          <Formik
+            initialValues={{
+              email: '',
+              password: '',
+              repeatedPassword: '',
+            }}
+            onSubmit={async (values) => {
+              try {
+                await createUser(values.email, values.password);
+                router.push('/dashboard');
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+            validationSchema={RegisterSchema}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <div className="w-full mt-4">
+                  <Input name="email" label="Email" type="text" />
+                </div>
 
-            <div className="w-full mt-4">
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                type="password"
-                placeholder="Password"
-                aria-label="Password"
-              />
-            </div>
+                <div className="w-full mt-4">
+                  <Input name="password" label="Password" type="password" />
+                </div>
 
-            <div className="flex items-center justify-between mt-4">
-              <button
-                onClick={handleRegister}
-                className="px-4 py-2 leading-5 text-white w-full transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
-                type="button"
-              >
-                Register
-              </button>
-            </div>
-          </form>
+                <div className="w-full mt-4">
+                  <Input
+                    name="repeatedPassword"
+                    label="Repeat password"
+                    type="password"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between mt-4">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                    isLoading={isSubmitting}
+                  >
+                    Register
+                  </Button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import { NextPage } from 'next';
-import { useState, MouseEvent } from 'react';
+import * as Yup from 'yup';
+import { Form, Formik } from 'formik';
+import { Button, Input } from '@components';
+
+const ForgotPasswordSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Required'),
+});
 
 const Forgot: NextPage = () => {
-  const [email, setEmail] = useState('');
-
-  const handleForgotPassword = (e: MouseEvent) => {
-    e.preventDefault();
-  };
   return (
     <div className="flex h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -19,29 +20,39 @@ const Forgot: NextPage = () => {
             Please enter your email and we will send you link to create new
             password
           </p>
+          <Formik
+            initialValues={{
+              email: '',
+              password: '',
+              repeatedPassword: '',
+            }}
+            onSubmit={async (values) => {}}
+            validationSchema={ForgotPasswordSchema}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <div className="w-full mt-4">
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    aria-label="Email Address"
+                  />
+                </div>
 
-          <form>
-            <div className="w-full mt-4">
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                type="email"
-                placeholder="Email Address"
-                aria-label="Email Address"
-              />
-            </div>
-
-            <div className="flex items-center justify-between mt-4">
-              <button
-                type="button"
-                className="px-4 py-2 leading-5 text-white w-full transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
-                onClick={handleForgotPassword}
-              >
-                Send
-              </button>
-            </div>
-          </form>
+                <div className="flex items-center justify-between mt-4">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    isLoading={isSubmitting}
+                    disabled={isSubmitting}
+                  >
+                    Send
+                  </Button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>
