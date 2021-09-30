@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -26,67 +27,73 @@ const Register: NextPage = () => {
   }, [router]);
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <div className="px-6 py-4">
-          <h2 className="text-3xl font-bold text-center text-gray-700 dark:text-white">
-            Hermes
-          </h2>
+    <>
+      <Head>
+        <title>Sign Up</title>
+      </Head>
 
-          <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
-            Create account
-          </p>
+      <div className="flex h-screen items-center justify-center bg-gray-100">
+        <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+          <div className="px-6 py-4">
+            <h2 className="text-3xl font-bold text-center text-gray-700 dark:text-white">
+              Hermes
+            </h2>
 
-          <Formik
-            initialValues={{
-              email: '',
-              password: '',
-              repeatedPassword: '',
-            }}
-            onSubmit={async (values) => {
-              try {
-                await createUser(values.email, values.password);
-                router.push('/dashboard');
-              } catch (error) {
-                console.error(error);
-              }
-            }}
-            validationSchema={RegisterSchema}
-          >
-            {({ isSubmitting }) => (
-              <Form>
-                <div className="w-full mt-4">
-                  <Input name="email" label="Email" type="text" />
-                </div>
+            <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
+              Create account
+            </p>
 
-                <div className="w-full mt-4">
-                  <Input name="password" label="Password" type="password" />
-                </div>
+            <Formik
+              initialValues={{
+                email: '',
+                password: '',
+                repeatedPassword: '',
+              }}
+              onSubmit={async (values) => {
+                try {
+                  await createUser(values.email, values.password);
+                  router.push('/dashboard');
+                } catch (error) {
+                  console.error(error);
+                }
+              }}
+              validationSchema={RegisterSchema}
+            >
+              {({ isSubmitting }) => (
+                <Form>
+                  <div className="w-full mt-4">
+                    <Input name="email" label="Email" type="text" />
+                  </div>
 
-                <div className="w-full mt-4">
-                  <Input
-                    name="repeatedPassword"
-                    label="Repeat password"
-                    type="password"
-                  />
-                </div>
+                  <div className="w-full mt-4">
+                    <Input name="password" label="Password" type="password" />
+                  </div>
 
-                <div className="flex items-center justify-between mt-4">
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    disabled={isSubmitting}
-                    isLoading={isSubmitting}
-                  >
-                    Register
-                  </Button>
-                </div>
-              </Form>
-            )}
-          </Formik>
+                  <div className="w-full mt-4">
+                    <Input
+                      name="repeatedPassword"
+                      label="Repeat password"
+                      type="password"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between mt-4">
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      disabled={isSubmitting}
+                      isLoading={isSubmitting}
+                    >
+                      Register
+                    </Button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

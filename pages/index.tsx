@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
@@ -9,7 +10,14 @@ const Home: NextPage = () => {
     router.push('/auth/login');
   }, [router]);
 
-  return <h1>HOME</h1>;
+  return (
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <h1>HOME</h1>
+    </>
+  );
 };
 
 export default Home;
