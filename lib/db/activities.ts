@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { User } from '@types';
-import { db } from '@firebase/client';
+import { User } from '@hermes/types';
+import { db } from '@hermes/firebase/client';
 
 export const getFirestoreUser = async (userUID: string) => {
   const docRef = doc(db, 'users', userUID);
