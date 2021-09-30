@@ -1,16 +1,18 @@
-import { FC } from 'react';
+import { forwardRef, Ref } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 
 export type InputProps = FieldHookConfig<string> & {
+  ref: Ref<HTMLInputElement>;
+} & {
   label?: string;
 };
 
-export const Input: FC<InputProps> = (props) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const [field, meta, helpers] = useField(props);
   const { label, type, placeholder } = props;
 
   return (
-    <div>
+    <div ref={ref}>
       {label && (
         <label className="block text-sm text-gray-800 dark:text-gray-200">
           {label}
@@ -25,8 +27,10 @@ export const Input: FC<InputProps> = (props) => {
       />
 
       {meta.touched && meta.error ? (
-        <p className="text-red-600">{meta.error}</p>
+        <p className="text-red-500">{meta.error}</p>
       ) : null}
     </div>
   );
-};
+});
+
+Input.displayName = 'Input';

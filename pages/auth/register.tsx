@@ -3,8 +3,8 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { createUser } from 'lib/auth';
-import { Input, Button } from '@components';
+import { createUser } from '@hermes/auth';
+import { Input, Button } from '@hermes/components';
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),

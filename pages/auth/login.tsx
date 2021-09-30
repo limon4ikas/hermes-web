@@ -1,9 +1,9 @@
 import { MouseEvent, useEffect } from 'react';
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { loginWithGoogle, loginWithEmailAndPassword } from 'lib/auth';
-import { Input, Button, GoogleIcon } from '@components';
+import Link from 'next/link';
+import { loginWithGoogle, loginWithEmailAndPassword } from '@hermes/auth';
+import { Input, Button, GoogleIcon } from '@hermes/components';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 

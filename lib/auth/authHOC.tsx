@@ -9,12 +9,7 @@ export const withAuth = (config?: WithAuthConfig) => (Page: NextPage) => {
     const { authState } = useAuth();
     const router = useRouter();
 
-    // 1. Show full page loading spinner if auth is not initialised
-    if (authState === 'loading') {
-      return <h1>LOADING...</h1>;
-    }
-
-    // 2. Redirect to login path if user is not authenticated
+    // 1. Redirect to login path if user is not authenticated
     if (authState === 'unauthenticated') {
       router.replace('auth/login');
       return <h1>REDIRECTING...</h1>;

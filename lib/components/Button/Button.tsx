@@ -1,4 +1,10 @@
-import { FC, ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  forwardRef,
+  Ref,
+} from 'react';
+import { Spinner } from '../Spinner';
 
 export const buttonVariants = {
   primary:
@@ -11,20 +17,28 @@ export type ButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 > & {
-  isLoading?: boolean;
+  ref: Ref<HTMLButtonElement>;
+} & {
   variant?: keyof typeof buttonVariants;
+  isLoading?: boolean;
 };
 
-export const Button: FC<ButtonProps> = ({
-  variant = 'primary',
-  isLoading,
-  children,
-  className = '',
-  ...props
-}) => {
-  return (
-    <button {...props} className={`${buttonVariants[variant]} ${className}`}>
-      {isLoading ? <span>Loading...</span> : children}
-    </button>
-  );
-};
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { variant = 'primary', isLoading, children, className = '', ...rest },
+    ref
+  ) => {
+    return (
+      <button
+        {...rest}
+        className={`flex items-center justify-center gap-2 ${buttonVariants[variant]} ${className}`}
+        ref={ref}
+      >
+        {children}
+        {isLoading && <Spinner />}
+      </button>
+    );
+  }
+);
+
+Button.displayName = 'Button';

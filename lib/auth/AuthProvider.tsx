@@ -1,14 +1,9 @@
 import { createContext, FC, useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
-import { clientAuth } from '@firebase/client';
+import { clientAuth } from '@hermes/firebase';
 import { getTokenCookie, setTokenCookie } from './utils';
 
-type AuthState =
-  | 'init'
-  | 'loading'
-  | 'expect'
-  | 'authenticated'
-  | 'unauthenticated';
+type AuthState = 'init' | 'expect' | 'authenticated' | 'unauthenticated';
 
 interface AuthContext {
   user: User | null;
@@ -17,7 +12,7 @@ interface AuthContext {
 
 export const AuthContext = createContext<AuthContext>({
   user: null,
-  authState: 'loading',
+  authState: 'init',
 });
 
 export const AuthProvider: FC = ({ children }) => {
@@ -25,7 +20,7 @@ export const AuthProvider: FC = ({ children }) => {
   const [authState, setAuthState] = useState<AuthState | null>('init');
 
   useEffect(() => {
-    getTokenCookie() ? setAuthState('expect') : setAuthState('loading');
+    getTokenCookie() ? setAuthState('expect') : setAuthState('unauthenticated');
 
     const unsubscribe = clientAuth.onAuthStateChanged(async (user) => {
       if (user) {

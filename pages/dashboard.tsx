@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
-import { withAuth, logout } from '@auth';
+import { withAuth, logout } from '@hermes/auth';
+import { Button } from '@hermes/components';
 
 // STRAVA
 const redirectAfterAuthURL = 'http://localhost:3000/strava-sync';
@@ -24,8 +25,8 @@ const redirectAfterAuthURL = 'http://localhost:3000/strava-sync';
 const Dashboard: NextPage = () => {
   return (
     <div>
-      <button onClick={logout}>LOGOUT</button>
-      <a onClick={logout}>LOGOUT</a>
+      <Button onClick={logout}>LOGOUT</Button>
+      <Button onClick={logout}>Strava sync</Button>
     </div>
   );
 };

@@ -2,13 +2,20 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["lib/components/*"],
-      "@components": ["lib/components"],
-      "@hooks/*": ["lib/hooks/*"],
-      "@firebase/*": ["lib/firebase/*"],
-      "@auth": ["lib/auth"],
-      "@state": ["lib/state"],
-      "@types": ["lib/types"]
+      "@hermes/components/*": ["lib/components/*"],
+      "@hermes/components": ["lib/components"],
+      "@hermes/state/*": ["lib/state/*"],
+      "@hermes/state": ["lib/state"],
+      "@hermes/hooks/*": ["lib/hooks/*"],
+      "@hermes/hooks": ["lib/hooks"],
+      "@hermes/firebase/*": ["lib/firebase/*"],
+      "@hermes/firebase": ["lib/firebase"],
+      "@hermes/auth/*": ["lib/auth/*"],
+      "@hermes/auth": ["lib/auth"],
+      "@hermes/db/*": ["lib/db/*"],
+      "@hermes/db": ["lib/db"],
+      "@hermes/types/*": ["lib/types/*"],
+      "@hermes/types": ["lib/types"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

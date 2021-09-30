@@ -1,7 +1,9 @@
 import cookie from 'js-cookie';
 
 const getCookieExpirationTime = () => {
-  return new Date().setTime(new Date().getTime() + 55 * 60 * 1000);
+  const minutes = 55;
+
+  return new Date(new Date().getTime() + minutes * 60000);
 };
 
 export const setTokenCookie = (token: string) => {

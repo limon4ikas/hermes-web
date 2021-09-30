@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
-import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
-import { Button, Input } from '@components';
-import { sendPasswordResetMail } from 'lib/auth';
 import { useRouter } from 'next/router';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { sendPasswordResetMail } from '@hermes/auth';
+import { Button, Input } from '@hermes/components';
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
