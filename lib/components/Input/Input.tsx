@@ -7,7 +7,7 @@ export type InputProps = FieldHookConfig<string> & {
   label?: string;
 };
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = forwardRef<HTMLDivElement, InputProps>((props, ref) => {
   const [field, meta, helpers] = useField(props);
   const { label, type, placeholder } = props;
 
