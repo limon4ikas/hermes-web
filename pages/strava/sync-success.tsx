@@ -1,26 +1,16 @@
+import { useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 const StravaSyncSuccess: NextPage = () => {
   const [redirectTime, setRedirectTimer] = useState(5);
   const router = useRouter();
 
-  console.log(router.query);
+  // 1. Call an API with code to exchange for tokens
 
-  // useEffect(() => {
-  //   const id = setInterval(() => {
-  //     setRedirectTimer((prev) => prev - 1);
-  //   }, 1000);
+  // 2. Call an API to fully sync all activities from strava
 
-  //   return () => clearInterval(id);
-  // }, [router]);
-
-  // useEffect(() => {
-  //   router.prefetch('/dashboard');
-
-  //   if (redirectTime === 0) router.push('/dashboard');
-  // }, [redirectTime, router]);
+  // 3. If is success then redirect to dashboard
 
   return (
     <div className="flex flex-col items-center justify-center bg-blue-300 h-screen w-screen">

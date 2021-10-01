@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { BASE_URL } from '@hermes/env';
 import { Button } from '@hermes/components/Button';
 import queryString from 'query-string';
@@ -17,7 +17,7 @@ const queryParams = queryString.stringify(params);
 
 export interface StravaSyncProps {}
 
-export const StravaSync: FC<StravaSyncProps> = () => {
+export const StartStravaSync: FC<StravaSyncProps> = () => {
   return (
     <a
       href={`https://www.strava.com/oauth/authorize?${queryParams}`}

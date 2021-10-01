@@ -2,9 +2,9 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useAuth } from './useAuth';
 
-interface WithAuthConfig {}
+interface WithAuthHOCConfig {}
 
-export const withAuth = (config?: WithAuthConfig) => (Page: NextPage) => {
+export const withAuth = (config?: WithAuthHOCConfig) => (Page: NextPage) => {
   const WithAuth = (props: any) => {
     const { authState } = useAuth();
     const router = useRouter();

@@ -1,1 +1,1 @@
-export * from './components/StravaSync';
+export * from './components/StartStravaSync';

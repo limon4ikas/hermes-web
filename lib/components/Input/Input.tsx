@@ -2,7 +2,7 @@ import { forwardRef, Ref } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 
 export type InputProps = FieldHookConfig<string> & {
-  ref: Ref<HTMLInputElement>;
+  ref: Ref<HTMLDivElement>;
 } & {
   label?: string;
 };
