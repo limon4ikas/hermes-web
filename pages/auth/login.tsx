@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { loginWithGoogle, loginWithEmailAndPassword } from '@hermes/auth';
 import { Input, Button, GoogleIcon } from '@hermes/components';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const LoginSchema = Yup.object().shape({
@@ -36,6 +36,22 @@ const Login: NextPage = () => {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: async (values) => {
+      try {
+        await loginWithEmailAndPassword(values.email, values.password);
+        router.push('/dashboard');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    validationSchema: LoginSchema,
+  });
+
   return (
     <>
       <Head>
@@ -47,46 +63,29 @@ const Login: NextPage = () => {
           <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
             Hermes
           </h1>
-          <Formik
-            initialValues={{
-              email: '',
-              password: '',
-            }}
-            onSubmit={async (values) => {
-              try {
-                await loginWithEmailAndPassword(values.email, values.password);
-                router.push('/dashboard');
-              } catch (error) {
-                console.error(error);
-              }
-            }}
-            validationSchema={LoginSchema}
-          >
-            {({ isSubmitting }) => (
-              <Form className="mt-6">
-                <Input name="email" label="Email" type="text" />
-                <div className="mt-4">
-                  <Input name="password" type="password" label="Password" />
-                  <Link href="/auth/forgot">
-                    <a className="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline">
-                      Forgot you password?
-                    </a>
-                  </Link>
-                </div>
+          <FormikProvider value={formik}>
+            <Form className="mt-6">
+              <Input name="email" label="Email" type="text" />
+              <div className="mt-4">
+                <Input name="password" type="password" label="Password" />
+                <Link href="/auth/forgot">
+                  <a className="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline">
+                    Forgot you password?
+                  </a>
+                </Link>
+              </div>
 
-                <div className="mt-6">
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    isLoading={isSubmitting}
-                  >
-                    Login
-                  </Button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-
+              <div className="mt-6">
+                <Button
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                  isLoading={formik.isSubmitting}
+                >
+                  Login
+                </Button>
+              </div>
+            </Form>
+          </FormikProvider>
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
 

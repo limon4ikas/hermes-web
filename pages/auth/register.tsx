@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createUser } from '@hermes/auth';
 import { Input, Button } from '@hermes/components';
@@ -26,6 +26,19 @@ const Register: NextPage = () => {
     router.prefetch('/dashboard');
   }, [router]);
 
+  const formik = useFormik({
+    initialValues: { email: '', password: '', repeatedPassword: '' },
+    onSubmit: async (values) => {
+      try {
+        await createUser(values.email, values.password);
+        router.push('/dashboard');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    validationSchema: RegisterSchema,
+  });
+
   return (
     <>
       <Head>
@@ -38,58 +51,39 @@ const Register: NextPage = () => {
             <h2 className="text-3xl font-bold text-center text-gray-700 dark:text-white">
               Hermes
             </h2>
-
             <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
               Create account
             </p>
+            <FormikProvider value={formik}>
+              <Form>
+                <div className="w-full mt-4">
+                  <Input name="email" label="Email" type="text" />
+                </div>
 
-            <Formik
-              initialValues={{
-                email: '',
-                password: '',
-                repeatedPassword: '',
-              }}
-              onSubmit={async (values) => {
-                try {
-                  await createUser(values.email, values.password);
-                  router.push('/dashboard');
-                } catch (error) {
-                  console.error(error);
-                }
-              }}
-              validationSchema={RegisterSchema}
-            >
-              {({ isSubmitting }) => (
-                <Form>
-                  <div className="w-full mt-4">
-                    <Input name="email" label="Email" type="text" />
-                  </div>
+                <div className="w-full mt-4">
+                  <Input name="password" label="Password" type="password" />
+                </div>
 
-                  <div className="w-full mt-4">
-                    <Input name="password" label="Password" type="password" />
-                  </div>
+                <div className="w-full mt-4">
+                  <Input
+                    name="repeatedPassword"
+                    label="Repeat password"
+                    type="password"
+                  />
+                </div>
 
-                  <div className="w-full mt-4">
-                    <Input
-                      name="repeatedPassword"
-                      label="Repeat password"
-                      type="password"
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between mt-4">
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      disabled={isSubmitting}
-                      isLoading={isSubmitting}
-                    >
-                      Register
-                    </Button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+                <div className="flex items-center justify-between mt-4">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    disabled={formik.isSubmitting}
+                    isLoading={formik.isSubmitting}
+                  >
+                    Register
+                  </Button>
+                </div>
+              </Form>
+            </FormikProvider>
           </div>
         </div>
       </div>

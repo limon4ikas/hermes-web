@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Form, Formik } from 'formik';
+import { Form, useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
 import { sendPasswordResetMail } from '@hermes/auth';
 import { Button, Input } from '@hermes/components';
@@ -13,6 +13,23 @@ const ForgotPasswordSchema = Yup.object().shape({
 // TODO: #1 Display error if could not send email
 const Forgot: NextPage = () => {
   const router = useRouter();
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      repeatedPassword: '',
+    },
+    onSubmit: async (values) => {
+      try {
+        await sendPasswordResetMail(values.email);
+        router.push('/auth/login');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    validationSchema: ForgotPasswordSchema,
+  });
 
   return (
     <>
@@ -30,46 +47,29 @@ const Forgot: NextPage = () => {
               Please enter your email and we will send you link to create new
               password
             </p>
-            <Formik
-              initialValues={{
-                email: '',
-                password: '',
-                repeatedPassword: '',
-              }}
-              onSubmit={async (values) => {
-                try {
-                  await sendPasswordResetMail(values.email);
-                  router.push('/auth/login');
-                } catch (error) {
-                  console.error(error);
-                }
-              }}
-              validationSchema={ForgotPasswordSchema}
-            >
-              {({ isSubmitting }) => (
-                <Form>
-                  <div className="w-full mt-4">
-                    <Input
-                      name="email"
-                      type="email"
-                      placeholder="Email Address"
-                      aria-label="Email Address"
-                    />
-                  </div>
+            <FormikProvider value={formik}>
+              <Form>
+                <div className="w-full mt-4">
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    aria-label="Email Address"
+                  />
+                </div>
 
-                  <div className="flex items-center justify-between mt-4">
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      isLoading={isSubmitting}
-                      disabled={isSubmitting}
-                    >
-                      Send
-                    </Button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
+                <div className="flex items-center justify-between mt-4">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    isLoading={formik.isSubmitting}
+                    disabled={formik.isSubmitting}
+                  >
+                    Send
+                  </Button>
+                </div>
+              </Form>
+            </FormikProvider>
           </div>
         </div>
       </div>
