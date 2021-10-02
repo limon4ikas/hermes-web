@@ -1,8 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { functionsApi } from '../api';
 
 export const store = configureStore({
-  reducer: {},
-  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],
+  reducer: {
+    [functionsApi.reducerPath]: functionsApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) => [
+    ...getDefaultMiddleware(),
+    functionsApi.middleware,
+  ],
   devTools: true,
   enhancers: [],
 });

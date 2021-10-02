@@ -3,7 +3,7 @@ import { BASE_URL } from '@hermes/env';
 import { Button } from '@hermes/components/Button';
 import queryString from 'query-string';
 
-const redirectAfterAuthURL = `${BASE_URL}/strava/sync-success`;
+const redirectAfterAuthURL = `${BASE_URL}/strava/connect`;
 
 const params = {
   client_id: process.env['NEXT_PUBLIC_STRAVA_CLIENT_ID'],
@@ -17,7 +17,7 @@ const queryParams = queryString.stringify(params);
 
 export interface StravaSyncProps {}
 
-export const StartStravaSync: FC<StravaSyncProps> = () => {
+export const StravaConnectButton: FC<StravaSyncProps> = () => {
   return (
     <a
       href={`https://www.strava.com/oauth/authorize?${queryParams}`}

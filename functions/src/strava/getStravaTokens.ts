@@ -10,29 +10,55 @@ import { bootstrapExpress } from '../utils';
 
 const app = bootstrapExpress();
 
-app.post<{}, {}, string>('/', async (request, response) => {
+interface StravaTokensAPIResponse {
+  data: {
+    accessToken: string;
+    expiresAt: string;
+    expirestIn: string;
+    refreshToken: string;
+    tokenType: string;
+    athlete: Record<string, any>;
+  };
+}
+
+app.post<{}, {}, any>('/', async (request, response) => {
   try {
-    const { idToken, stravaToken } = JSON.parse(request.body);
+    const { idToken, stravaToken } = request.body;
 
     // 1. Check auth token
     const user = await admin.auth().verifyIdToken(idToken);
 
     // 2. Retrieve strava tokens
-    const { data } = await stravaAPI.post(
-      `/oauth/token?client_id=${STRAVA_CLIENT_ID}&client_secret=${STRAVA_CLIENT_SECRET}&code=${stravaToken}&grant_type=${STRAVA_GRANT_TYPE}`
+    const { data } = await stravaAPI.post<{}, StravaTokensAPIResponse>(
+      '/oauth/token',
+      {},
+      {
+        params: {
+          client_id: STRAVA_CLIENT_ID,
+          client_secret: STRAVA_CLIENT_SECRET,
+          code: stravaToken,
+          grant_type: STRAVA_GRANT_TYPE,
+        },
+      }
     );
 
-    // 3. Add strava tokens to firestore
-    await admin.firestore().doc(`/users/${user.uid}`).update(data);
+    const { athlete, expirestIn, tokenType, ...restData } = data;
 
-    // 4. Add tokens to firestore
+    // 3. Add strava tokens to firestore
+    await admin
+      .firestore()
+      .collection('stravaTokens')
+      .doc(user.uid)
+      .set(restData);
+
+    // 4. Complete
     return response.sendStatus(200);
   } catch (error) {
     if (error instanceof Error) {
       console.error(error);
       return response
         .status(500)
-        .json({ type: 'ERROR', message: error.message, data: request.body });
+        .json({ type: 'ERROR', message: error.message });
     }
 
     console.error(error);

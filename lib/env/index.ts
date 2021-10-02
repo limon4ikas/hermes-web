@@ -5,3 +5,6 @@ export const IS_TEST = process.env.NODE_ENV === 'test';
 export const BASE_URL = IS_PROD
   ? 'https://hermes-seven.vercel.app'
   : 'http://localhost:3000';
+
+export const FUNCTIONS_BASE_URL =
+  'https://europe-west1-hermes-4224e.cloudfunctions.net/';
