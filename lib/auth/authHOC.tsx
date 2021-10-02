@@ -11,7 +11,7 @@ export const withAuth = (config?: WithAuthHOCConfig) => (Page: NextPage) => {
 
     // 1. Redirect to login path if user is not authenticated
     if (authState === 'unauthenticated') {
-      router.replace('auth/login');
+      router.replace('/auth/login');
       return <h1>REDIRECTING...</h1>;
     }
 

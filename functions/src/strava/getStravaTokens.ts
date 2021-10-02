@@ -10,9 +10,9 @@ import { bootstrapExpress } from '../utils';
 
 const app = bootstrapExpress();
 
-app.post('/', async (request, response) => {
+app.post<{}, {}, string>('/', async (request, response) => {
   try {
-    const { idToken, stravaToken } = request.body;
+    const { idToken, stravaToken } = JSON.parse(request.body);
 
     // 1. Check auth token
     const user = await admin.auth().verifyIdToken(idToken);
@@ -26,16 +26,17 @@ app.post('/', async (request, response) => {
     await admin.firestore().doc(`/users/${user.uid}`).update(data);
 
     // 4. Add tokens to firestore
-    return response.status(200);
+    return response.sendStatus(200);
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error);
       return response
         .status(500)
-        .json({ type: 'ERROR', message: error.message });
+        .json({ type: 'ERROR', message: error.message, data: request.body });
     }
 
     console.error(error);
-    return response.sendStatus(500);
+    return response.status(500).json({ type: 'ERROR' });
   }
 });
 

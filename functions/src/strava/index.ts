@@ -1,2 +1,2 @@
 export * from './webhook';
-export * from './tokens';
+export * from './getStravaTokens';

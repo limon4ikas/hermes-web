@@ -1,21 +1,16 @@
 import * as functions from 'firebase-functions';
-import express = require('express');
-import cors = require('cors');
+import { STRAVA_VERIFY_TOKEN } from '../env';
+import { bootstrapExpress } from '../utils';
 
-const app = express();
-app.use(cors({ origin: true }));
+const app = bootstrapExpress();
 
-// CREATE SUBSCRIPTION
 app.get('/', (req, res) => {
-  const VERIFY_TOKEN = 'HERMES_FIREBASE_APP';
-
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
   const challenge = req.query['hub.challenge'];
 
   if (mode && token) {
-    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-      console.log('WEBHOOK_VERIFIED');
+    if (mode === 'subscribe' && token === STRAVA_VERIFY_TOKEN) {
       res.status(200).json({ 'hub.challenge': challenge });
     } else {
       res.sendStatus(403);
@@ -23,22 +18,7 @@ app.get('/', (req, res) => {
   }
 });
 
-// HANDLE EVENTS
 app.post('/', (req, res) => {
-  // const example = {
-  // 	aspect_type: 'update',
-  // 	event_time: 1516126040,
-  // 	object_id: 1360128428,
-  // 	object_type: 'activity',
-  // 	owner_id: 134815,
-  // 	subscription_id: 120475,
-  // 	updates: {
-  // 		title: 'Messy'
-  // 	}
-  // };
-
-  console.log(req.body.aspect_type);
-
   res.sendStatus(200);
 });
 
