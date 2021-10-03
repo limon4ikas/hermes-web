@@ -1,56 +1,30 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import {
-  STRAVA_CLIENT_ID,
-  STRAVA_CLIENT_SECRET,
-  STRAVA_GRANT_TYPE,
-} from '../env';
-import { stravaAPI } from './stravaAPI';
 import { bootstrapExpress } from '../utils';
 import { camelizeKeys } from 'humps';
+import { getStravaTokens } from './helpers';
+import { StravaTokenAuthBody } from '@hermes/types';
 
 const app = bootstrapExpress();
 
-interface StravaTokensAPIResponse {
-  data: {
-    accessToken: string;
-    expiresAt: string;
-    expirestIn: string;
-    refreshToken: string;
-    tokenType: string;
-    athlete: Record<string, any>;
-  };
-}
-
-app.post<{}, {}, any>('/', async (request, response) => {
+// TODO: Make express middleware to check for auth token header
+// TODO: Add to firestore athlete id
+app.post<{}, {}, StravaTokenAuthBody>('/', async (request, response) => {
   try {
-    const { idToken, stravaToken } = request.body;
+    const { idToken, stravaAuthCode } = request.body;
 
     // 1. Check auth token
     const user = await admin.auth().verifyIdToken(idToken);
 
     // 2. Retrieve strava tokens
-    const { data } = await stravaAPI.post<{}, StravaTokensAPIResponse>(
-      '/oauth/token',
-      {},
-      {
-        params: {
-          client_id: STRAVA_CLIENT_ID,
-          client_secret: STRAVA_CLIENT_SECRET,
-          code: stravaToken,
-          grant_type: STRAVA_GRANT_TYPE,
-        },
-      }
-    );
-
-    const { athlete, expirestIn, tokenType, ...restData } = data;
+    const tokens = await getStravaTokens(stravaAuthCode);
 
     // 3. Add strava tokens to firestore
     await admin
       .firestore()
       .collection('stravaTokens')
       .doc(user.uid)
-      .set(camelizeKeys(restData));
+      .set(camelizeKeys(tokens));
 
     // 4. Complete
     return response.status(200).json({
@@ -66,7 +40,9 @@ app.post<{}, {}, any>('/', async (request, response) => {
     }
 
     functions.logger.error(error);
-    return response.sendStatus(500);
+    return response
+      .status(500)
+      .json({ type: 'ERROR', message: 'Something went wrong...' });
   }
 });
 

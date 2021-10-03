@@ -1,10 +1,20 @@
-export interface StravaLoginResponse {
+export interface StravaTokenResponse {
   accessToken: string;
   expiresAt: number;
   expiresIn: number;
   refreshToken: string;
   tokenType: string;
   athlete: StravaAthlete;
+}
+
+export interface StravaTokenAuthBody {
+  stravaAuthCode: string;
+  idToken: string;
+}
+
+export interface StravaTokenAuthResponse {
+  type: string;
+  message?: string;
 }
 
 export interface StravaAthlete {
@@ -86,11 +96,4 @@ export interface Activity {
   prCount: number;
   totalPhotoCount: number;
   hasKudoed: boolean;
-}
-
-export interface StravaTokenExchange {
-  client_id: string;
-  client_secret: string;
-  code: string;
-  grant_type: 'authorization_code';
 }

@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "paths": {
+      "@hermes/types/*": ["../lib/types/*"],
+      "@hermes/types": ["../lib/types"]
+    }
   },
   "compileOnSave": true,
   "include": ["src"]

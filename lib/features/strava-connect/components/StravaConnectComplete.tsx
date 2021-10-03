@@ -12,14 +12,15 @@ export const StravaConnectComplete: FC = () => {
 
   const [
     tryConnectToStrava,
-    { isError, isLoading, isSuccess, error },
+    { isError, isLoading, isSuccess },
   ] = useLazyConnectToStravaQuery();
 
   useEffect(() => {
     const startStravaConnect = async () => {
       if (user && code) {
         const idToken = await user.getIdToken();
-        tryConnectToStrava({ idToken, stravaToken: code as string });
+
+        tryConnectToStrava({ idToken, stravaAuthCode: code as string });
       }
     };
 
@@ -36,7 +37,6 @@ export const StravaConnectComplete: FC = () => {
         </>
       )}
       {isError && <h1>Something went wrong...</h1>}
-      {isError && JSON.stringify(error)}
     </div>
   );
 };
