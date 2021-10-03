@@ -1,9 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { bootstrapExpress } from '../utils';
-import { camelizeKeys } from 'humps';
-import { getStravaTokens } from './helpers';
 import { StravaTokenAuthBody } from '@hermes/types';
+import { bootstrapExpress } from '../utils';
+import { addTokensToDb, fetchAllActivities, getStravaTokens } from './helpers';
 
 const app = bootstrapExpress();
 
@@ -20,16 +19,16 @@ app.post<{}, {}, StravaTokenAuthBody>('/', async (request, response) => {
     const tokens = await getStravaTokens(stravaAuthCode);
 
     // 3. Add strava tokens to firestore
-    await admin
-      .firestore()
-      .collection('stravaTokens')
-      .doc(user.uid)
-      .set(camelizeKeys(tokens));
+    await addTokensToDb(user.uid, tokens);
 
-    // 4. Complete
+    // 4. Fetch all activies and add them to user
+    await fetchAllActivities(user.uid, tokens.accessToken);
+
+    // 5. Complete
     return response.status(200).json({
       type: 'SUCCESS',
       message: 'Strava tokens acquired successfully',
+      data: tokens,
     });
   } catch (error) {
     if (error instanceof Error) {

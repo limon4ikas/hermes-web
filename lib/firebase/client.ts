@@ -1,10 +1,12 @@
+import { IS_DEV } from '@hermes/env';
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
   browserLocalPersistence,
   getAuth,
   GoogleAuthProvider,
+  connectAuthEmulator,
 } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env['NEXT_PUBLIC_FIREBASE_API_KEY'],
@@ -28,11 +30,15 @@ const initAuth = () => {
   const clientAuth = getAuth();
   clientAuth.setPersistence(browserLocalPersistence);
 
+  if (IS_DEV) connectAuthEmulator(clientAuth, 'http://localhost:9099');
+
   return clientAuth;
 };
 
 const initFirestore = () => {
   const db = getFirestore();
+
+  if (IS_DEV) connectFirestoreEmulator(db, 'localhost', 8080);
 
   return db;
 };
