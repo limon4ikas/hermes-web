@@ -1,13 +1,12 @@
-import { stravaAPI } from './stravaAPI';
+import * as admin from 'firebase-admin';
+import { camelizeKeys } from 'humps';
 import {
   STRAVA_CLIENT_ID,
   STRAVA_CLIENT_SECRET,
   STRAVA_GRANT_TYPE,
 } from '../env';
 import { Activity, StravaTokenResponse } from '@hermes/types';
-import * as admin from 'firebase-admin';
-import { camelizeKeys } from 'humps';
-import * as functions from 'firebase-functions';
+import { stravaAPI } from './stravaAPI';
 
 export const getStravaTokens = async (stravaAuthCode: string) => {
   const { data } = await stravaAPI.post<{}, { data: StravaTokenResponse }>(
@@ -64,16 +63,9 @@ export const fetchAllActivities = async (
     }
   );
 
-  functions.logger.warn({
-    STRAVA_TOKEN_IS: stravaAccessToken,
-    USER_ID: userUID,
-  });
-
-  const camelizedData = camelizeKeys(data);
-
   const batch = admin.firestore().batch();
 
-  camelizedData.forEach((activity) => {
+  data.forEach((activity) => {
     const userActivitiesRef = admin
       .firestore()
       .collection(`users/${userUID}/activities`)

@@ -28,7 +28,6 @@ app.post<{}, {}, StravaTokenAuthBody>('/', async (request, response) => {
     return response.status(200).json({
       type: 'SUCCESS',
       message: 'Strava tokens acquired successfully',
-      data: tokens,
     });
   } catch (error) {
     if (error instanceof Error) {

@@ -30,7 +30,11 @@ const initAuth = () => {
   const clientAuth = getAuth();
   clientAuth.setPersistence(browserLocalPersistence);
 
-  if (IS_DEV) connectAuthEmulator(clientAuth, 'http://localhost:9099');
+  if (IS_DEV) {
+    connectAuthEmulator(clientAuth, 'http://localhost:9099', {
+      disableWarnings: true,
+    });
+  }
 
   return clientAuth;
 };
@@ -38,7 +42,9 @@ const initAuth = () => {
 const initFirestore = () => {
   const db = getFirestore();
 
-  if (IS_DEV) connectFirestoreEmulator(db, 'localhost', 8080);
+  if (IS_DEV) {
+    connectFirestoreEmulator(db, 'localhost', 8080);
+  }
 
   return db;
 };

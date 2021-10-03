@@ -35,3 +35,6 @@ yarn-error.log*
 
 # misc
 requests.http
+firestore-debug.log
+ui-debug.log
+firebase-debug.log
