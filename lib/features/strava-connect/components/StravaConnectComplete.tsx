@@ -28,7 +28,7 @@ export const StravaConnectComplete: FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center bg-blue-300 h-screen w-screen">
-      {isLoading && <h1>Please wait...</h1>}
+      {isLoading && <h1>Connecting to strava...</h1>}
       {isSuccess && (
         <>
           <h1>Sync with strava is successful</h1>

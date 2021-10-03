@@ -18,6 +18,7 @@ export const functionsApi = createApi({
         headers: {
           'content-type': 'application/json',
         },
+        responseHandler: async () => null,
       }),
     }),
   }),

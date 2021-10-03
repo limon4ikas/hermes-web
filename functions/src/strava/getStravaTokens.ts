@@ -7,6 +7,7 @@ import {
 } from '../env';
 import { stravaAPI } from './stravaAPI';
 import { bootstrapExpress } from '../utils';
+import { camelizeKeys } from 'humps';
 
 const app = bootstrapExpress();
 
@@ -49,20 +50,23 @@ app.post<{}, {}, any>('/', async (request, response) => {
       .firestore()
       .collection('stravaTokens')
       .doc(user.uid)
-      .set(restData);
+      .set(camelizeKeys(restData));
 
     // 4. Complete
-    return response.sendStatus(200);
+    return response.status(200).json({
+      type: 'SUCCESS',
+      message: 'Strava tokens acquired successfully',
+    });
   } catch (error) {
     if (error instanceof Error) {
-      console.error(error);
+      functions.logger.error(error.message);
       return response
         .status(500)
         .json({ type: 'ERROR', message: error.message });
     }
 
-    console.error(error);
-    return response.status(500).json({ type: 'ERROR' });
+    functions.logger.error(error);
+    return response.sendStatus(500);
   }
 });
 
