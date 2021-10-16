@@ -6,8 +6,6 @@ import { addTokensToDb, fetchAllActivities, getStravaTokens } from './helpers';
 
 const app = bootstrapExpress();
 
-// TODO: Make express middleware to check for auth token header
-// TODO: Add to firestore athlete id
 app.post<{}, {}, StravaTokenAuthBody>('/', async (request, response) => {
   try {
     const { idToken, stravaAuthCode } = request.body;

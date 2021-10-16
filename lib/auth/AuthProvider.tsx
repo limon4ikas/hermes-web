@@ -3,33 +3,40 @@ import { User } from 'firebase/auth';
 import { clientAuth } from '@hermes/firebase';
 import { getTokenCookie, setTokenCookie } from './utils';
 
-type AuthState = 'init' | 'expect' | 'authenticated' | 'unauthenticated';
+export enum AuthState {
+  Init = 'init',
+  Expect = 'expect',
+  Authenticated = 'authenticated',
+  Unauthenticated = 'unauthenticated',
+}
 
-interface AuthContext {
+export interface AuthContext {
   user: User | null;
   authState: AuthState | null;
 }
 
 export const AuthContext = createContext<AuthContext>({
   user: null,
-  authState: 'init',
+  authState: AuthState.Init,
 });
 
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [authState, setAuthState] = useState<AuthState | null>('init');
+  const [authState, setAuthState] = useState<AuthState | null>(AuthState.Init);
 
   useEffect(() => {
-    getTokenCookie() ? setAuthState('expect') : setAuthState('unauthenticated');
+    getTokenCookie()
+      ? setAuthState(AuthState.Expect)
+      : setAuthState(AuthState.Unauthenticated);
 
     const unsubscribe = clientAuth.onAuthStateChanged(async (user) => {
       if (user) {
         const token = await user.getIdToken();
         setTokenCookie(token);
-        setAuthState('authenticated');
+        setAuthState(AuthState.Authenticated);
         setUser(user);
       } else {
-        setAuthState('unauthenticated');
+        setAuthState(AuthState.Unauthenticated);
       }
     });
 

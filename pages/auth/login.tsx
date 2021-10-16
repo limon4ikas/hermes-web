@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { loginWithGoogle, loginWithEmailAndPassword } from '@hermes/auth';
 import { Input, Button, GoogleIcon } from '@hermes/components';
-import { Form, Formik, FormikProvider, useFormik } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const LoginSchema = Yup.object().shape({
@@ -41,9 +41,9 @@ const Login: NextPage = () => {
       email: '',
       password: '',
     },
-    onSubmit: async (values) => {
+    onSubmit: async ({ email, password }) => {
       try {
-        await loginWithEmailAndPassword(values.email, values.password);
+        await loginWithEmailAndPassword(email, password);
         router.push('/dashboard');
       } catch (error) {
         console.error(error);

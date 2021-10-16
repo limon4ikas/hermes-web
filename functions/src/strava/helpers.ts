@@ -24,15 +24,11 @@ export const getStravaTokens = async (stravaAuthCode: string) => {
 
   const { athlete, expiresIn, tokenType, ...accessAndRefreshToken } = data;
 
-  return accessAndRefreshToken;
+  return { stravaAthleteId: athlete.id, ...accessAndRefreshToken };
 };
 
 export const addTokensToDb = async (userUID: string, tokens: any) => {
-  await admin
-    .firestore()
-    .collection('stravaTokens')
-    .doc(userUID)
-    .set(camelizeKeys(tokens));
+  await admin.firestore().collection('stravaTokens').doc(userUID).set(tokens);
 };
 
 export const readStravaTokens = async () => {};
