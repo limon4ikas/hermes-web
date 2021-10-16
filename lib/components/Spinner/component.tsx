@@ -1,15 +1,17 @@
 import { FC } from 'react';
 
-const sizes = {
-  '2': 'h-2 w-2',
-  '4': 'h-4 w-4',
+export type SpinnerSize = 2 | 4;
+
+const sizes: Record<SpinnerSize, string> = {
+  2: 'h-2 w-2',
+  4: 'h-4 w-4',
 };
 
 export interface SpinnerProps {
-  size?: keyof typeof sizes;
+  size?: SpinnerSize;
 }
 
-export const Spinner: FC<SpinnerProps> = ({ size = '4' }) => {
+export const Spinner: FC<SpinnerProps> = ({ size = 4 }) => {
   return (
     <svg
       className={`animate-spin text-button ${sizes[size]}`}

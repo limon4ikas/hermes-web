@@ -7,3 +7,5 @@ export const GoogleIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
     </svg>
   );
 };
+
+export default GoogleIcon;
