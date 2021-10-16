@@ -4,10 +4,12 @@ import { Input, InputProps } from './component';
 
 export default {
   component: Input,
-  title: 'form/Base Input',
+  title: 'form/base/Base Input',
 } as Meta;
 
 const Template: Story<InputProps> = (args) => <Input {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  placeholder: 'Placeholder',
+};
