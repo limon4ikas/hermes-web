@@ -1,8 +1,8 @@
 import React, {
   ButtonHTMLAttributes,
+  ComponentPropsWithRef,
   DetailedHTMLProps,
   forwardRef,
-  Ref,
 } from 'react';
 import { Spinner } from '../Spinner';
 
@@ -15,19 +15,18 @@ export const buttonVariants: Record<ButtonVariant, string> = {
     'flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400 focus:outline-none',
 };
 
-export type ButtonProps = DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
-> & {
-  ref: Ref<HTMLButtonElement>;
-} & {
-  variant?: ButtonVariant;
-  isLoading?: boolean;
-};
+export type ButtonProps = ComponentPropsWithRef<'button'> &
+  DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > & {
+    variant?: ButtonVariant;
+    isLoading?: boolean;
+  };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variant = 'primary', isLoading, children, className = '', ...rest },
+    { variant = 'primary', isLoading, className = '', children, ...rest },
     ref
   ) => {
     return (
