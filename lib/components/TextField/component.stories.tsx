@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react';
 import { Formik, Form } from 'formik';
-import { Input, InputProps } from './Input';
+import { TextField, InputProps } from './component';
 
 export default {
-  component: Input,
-  title: 'components/Input',
+  component: TextField,
+  title: 'form/TextField',
 } as Meta;
 
 const Template: Story<InputProps> = (args) => (
@@ -15,7 +15,7 @@ const Template: Story<InputProps> = (args) => (
     onSubmit={(values) => {}}
   >
     <Form>
-      <Input {...args} />
+      <TextField {...args} />
     </Form>
   </Formik>
 );

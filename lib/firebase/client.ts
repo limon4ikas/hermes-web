@@ -3,7 +3,6 @@ import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
   browserLocalPersistence,
   getAuth,
-  GoogleAuthProvider,
   connectAuthEmulator,
 } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
@@ -48,9 +47,6 @@ const initFirestore = () => {
 
   return db;
 };
-
-// AUTH PROVIDERS
-export const googleAuthProvider = new GoogleAuthProvider();
 
 export const clientApp = initApp();
 export const clientAuth = initAuth();

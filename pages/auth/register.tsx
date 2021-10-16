@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Form, Formik, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createUser } from '@hermes/auth';
-import { Input, Button } from '@hermes/components';
+import { TextField, Button } from '@hermes/components';
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -57,15 +57,15 @@ const Register: NextPage = () => {
             <FormikProvider value={formik}>
               <Form>
                 <div className="w-full mt-4">
-                  <Input name="email" label="Email" type="text" />
+                  <TextField name="email" label="Email" type="text" />
                 </div>
 
                 <div className="w-full mt-4">
-                  <Input name="password" label="Password" type="password" />
+                  <TextField name="password" label="Password" type="password" />
                 </div>
 
                 <div className="w-full mt-4">
-                  <Input
+                  <TextField
                     name="repeatedPassword"
                     label="Repeat password"
                     type="password"

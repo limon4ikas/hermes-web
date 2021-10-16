@@ -6,7 +6,9 @@ import React, {
 } from 'react';
 import { Spinner } from '../Spinner';
 
-export const buttonVariants = {
+type ButtonVariant = 'primary' | 'google';
+
+export const buttonVariants: Record<ButtonVariant, string> = {
   primary:
     'px-4 py-2 leading-5 text-white w-full transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none',
   google:
@@ -19,7 +21,7 @@ export type ButtonProps = DetailedHTMLProps<
 > & {
   ref: Ref<HTMLButtonElement>;
 } & {
-  variant?: keyof typeof buttonVariants;
+  variant?: ButtonVariant;
   isLoading?: boolean;
 };
 

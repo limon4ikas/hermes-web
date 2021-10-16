@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { loginWithGoogle, loginWithEmailAndPassword } from '@hermes/auth';
-import { Input, Button, GoogleIcon } from '@hermes/components';
+import { TextField, Button, GoogleIcon } from '@hermes/components';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -65,9 +65,9 @@ const Login: NextPage = () => {
           </h1>
           <FormikProvider value={formik}>
             <Form className="mt-6">
-              <Input name="email" label="Email" type="text" />
+              <TextField name="email" label="Email" type="text" />
               <div className="mt-4">
-                <Input name="password" type="password" label="Password" />
+                <TextField name="password" type="password" label="Password" />
                 <Link href="/auth/forgot">
                   <a className="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline">
                     Forgot you password?
