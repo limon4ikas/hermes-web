@@ -1,7 +1,7 @@
 import { createContext, FC, useEffect, useState } from 'react';
 import { User } from 'firebase/auth';
 import { clientAuth } from '@hermes/firebase';
-import { getTokenCookie, setTokenCookie } from './utils';
+import { getTokenCookie, setTokenCookie } from '../utils';
 
 export enum AuthState {
   Init = 'init',

@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { AuthProvider } from '@hermes/auth';
+import { AuthProvider } from '@hermes/features/auth';
 import { store } from '@hermes/state';
 import '../styles/globals.css';
 

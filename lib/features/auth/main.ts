@@ -6,7 +6,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { clientAuth } from '@hermes/firebase';
-import { googleAuthProvider } from './authProviders';
+import { googleAuthProvider } from './AuthFirebaseProviders';
 
 export const loginWithEmailAndPassword = (email: string, password: string) => {
   return signInWithEmailAndPassword(clientAuth, email, password);

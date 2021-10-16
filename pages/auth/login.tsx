@@ -3,7 +3,10 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { loginWithGoogle, loginWithEmailAndPassword } from '@hermes/auth';
+import {
+  loginWithGoogle,
+  loginWithEmailAndPassword,
+} from '@hermes/features/auth';
 import { TextField, Button, GoogleIcon } from '@hermes/components';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';

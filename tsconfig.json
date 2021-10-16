@@ -17,10 +17,8 @@
       "@hermes/auth": ["lib/auth"],
       "@hermes/utils/*": ["lib/utils/*"],
       "@hermes/utils": ["lib/utils"],
-      "@hermes/api/*": ["lib/api/*"],
-      "@hermes/api": ["lib/api"],
-      "@hermes/db/*": ["lib/db/*"],
-      "@hermes/db": ["lib/db"],
+      "@hermes/services": ["lib/services"],
+      "@hermes/services/*": ["lib/services/*"],
       "@hermes/types/*": ["lib/types/*"],
       "@hermes/types": ["lib/types"]
     },

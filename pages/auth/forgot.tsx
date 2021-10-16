@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Form, useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
-import { sendPasswordResetMail } from '@hermes/auth';
+import { sendPasswordResetMail } from '@hermes/features/auth';
 import { Button, TextField } from '@hermes/components';
 
 const ForgotPasswordSchema = Yup.object().shape({

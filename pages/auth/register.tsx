@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Form, Formik, FormikProvider, useFormik } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
-import { createUser } from '@hermes/auth';
+import { createUser } from '@hermes/features/auth';
 import { TextField, Button } from '@hermes/components';
 
 const RegisterSchema = Yup.object().shape({

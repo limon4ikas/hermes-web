@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
-import { withAuth } from '@hermes/auth/authHOC';
-import { StravaConnectComplete } from '@hermes/features/strava-connect';
+import { withAuth } from '@hermes/features/auth';
+import { ConnectPage } from '@hermes/features/strava';
 
 const Connect: NextPage = () => {
-  return <StravaConnectComplete />;
+  return <ConnectPage />;
 };
 
 export default withAuth()(Connect);

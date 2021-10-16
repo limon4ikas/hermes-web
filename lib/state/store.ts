@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { functionsApi } from '../api';
+import { functionsApi } from '@hermes/services/functionsApi';
 
 export const store = configureStore({
   reducer: {

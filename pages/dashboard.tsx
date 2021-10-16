@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { withAuth } from '@hermes/auth';
+import { withAuth } from '@hermes/features/auth';
 import { DashboardPage, DashboardShell } from '@hermes/features/dashboard';
 
 const Dashboard: NextPage = () => {

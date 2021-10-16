@@ -2,11 +2,11 @@ import { FC, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useLazyConnectToStravaQuery } from '@hermes/api';
-import { useAuth } from '@hermes/auth/useAuth';
+import { useLazyConnectToStravaQuery } from '@hermes/services/functionsApi';
+import { useAuth } from '@hermes/features/auth';
 import { Button } from '@hermes/components/Button';
 
-export const StravaConnectComplete: FC = () => {
+export const ConnectPage: FC = () => {
   const {
     query: { code },
   } = useRouter();
