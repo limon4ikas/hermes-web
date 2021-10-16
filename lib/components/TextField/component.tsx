@@ -1,12 +1,12 @@
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, ComponentPropsWithRef } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 
-export type InputProps = ComponentPropsWithoutRef<'input'> &
+export type TextFieldProps = ComponentPropsWithRef<'div'> &
   FieldHookConfig<string> & {
     label?: string;
   };
 
-export const TextField = forwardRef<HTMLDivElement, InputProps>(
+export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   (props, ref) => {
     const [field, meta, helpers] = useField(props);
     const { label, type, placeholder } = props;

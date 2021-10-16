@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/react';
 import { Formik, Form } from 'formik';
-import { TextField, InputProps } from './component';
+import { TextField, TextFieldProps } from './component';
 
 export default {
   component: TextField,
   title: 'form/TextField',
 } as Meta;
 
-const Template: Story<InputProps> = (args) => (
+const Template: Story<TextFieldProps> = (args) => (
   <Formik
     initialValues={{
       email: '',
