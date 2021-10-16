@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { withAuth, logout } from '@hermes/auth';
-import { Button } from '@hermes/components';
-import { StravaConnectButton } from '@hermes/features/strava-connect';
+import { withAuth } from '@hermes/auth';
+import { DashboardPage, DashboardShell } from '@hermes/features/dashboard';
 
 const Dashboard: NextPage = () => {
   return (
@@ -10,13 +9,11 @@ const Dashboard: NextPage = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
-
-      <div>
-        <Button onClick={logout}>LOGOUT</Button>
-        <StravaConnectButton />
-      </div>
+      <DashboardPage />
     </>
   );
 };
 
-export default withAuth()(Dashboard);
+export default withAuth({
+  PageShell: <DashboardShell />,
+})(Dashboard);

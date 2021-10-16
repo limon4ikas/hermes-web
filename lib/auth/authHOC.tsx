@@ -1,12 +1,15 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useAuth } from './useAuth';
 import { AuthState } from './AuthProvider';
 
 interface WithAuthHOCConfig {
-  redirectURL: string;
+  redirectURL?: string;
+  PageShell?: ReactNode;
 }
+
+const DEFAULT_REDIRECT_URL = '/auth/login';
 
 const DEFAULT_AUTH_CONFIG: WithAuthHOCConfig = {
   redirectURL: '/auth/login',
@@ -20,25 +23,25 @@ const DefaultPageShell: FC = () => {
   );
 };
 
-export const withAuth = (config: WithAuthHOCConfig = DEFAULT_AUTH_CONFIG) => (
-  Page: NextPage
-) => {
+export const withAuth = ({
+  PageShell,
+  redirectURL,
+}: WithAuthHOCConfig = DEFAULT_AUTH_CONFIG) => (Page: NextPage) => {
   const WithAuth = (props: any) => {
     const { authState } = useAuth();
     const router = useRouter();
 
-    // 1. Expect to succseed auth process
     if (authState === AuthState.Init || authState === AuthState.Expect) {
+      if (PageShell) return PageShell;
+
       return <DefaultPageShell />;
     }
 
-    // 2. Redirect with redirect animation
     // TODO: #4 Show redirect animation
     if (authState === 'unauthenticated') {
-      router.replace(config.redirectURL);
+      router.replace(redirectURL || DEFAULT_REDIRECT_URL);
     }
 
-    // 3. Success auth
     return <Page {...props} />;
   };
 
