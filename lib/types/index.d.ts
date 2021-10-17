@@ -1,3 +1,5 @@
+export type TailwindCSS = string;
+
 export interface StravaTokenResponse {
   accessToken: string;
   expiresAt: number;

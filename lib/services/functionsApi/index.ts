@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { FUNCTIONS_BASE_URL } from '@hermes/env';
 import { StravaTokenAuthBody, StravaTokenAuthResponse } from '@hermes/types';
 
-// TODO: Add firebase id token to all Authorization headers
 export const functionsApi = createApi({
   reducerPath: 'functionsApi',
   baseQuery: fetchBaseQuery({

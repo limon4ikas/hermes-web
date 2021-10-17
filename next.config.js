@@ -5,7 +5,6 @@ module.exports = {
   reactStrictMode: true,
   async rewrites() {
     return [
-      { source: '/', destination: '/auth/login' },
       {
         source: '/api/:slug*',
         destination: IS_DEV

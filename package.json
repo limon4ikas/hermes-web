@@ -13,6 +13,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.22.0",
+    "clsx": "^1.1.1",
     "firebase": "^9.0.0",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",
