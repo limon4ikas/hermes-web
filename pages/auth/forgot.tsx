@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Form, useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
 import { sendPasswordResetMail } from '@hermes/features/auth';
-import { Button, TextField } from '@hermes/components';
+import { Button, ButtonVariant, TextField } from '@hermes/components';
 
 const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -61,7 +61,7 @@ const Forgot: NextPage = () => {
                 <div className="flex items-center justify-between mt-4">
                   <Button
                     type="submit"
-                    variant="primary"
+                    variant={ButtonVariant.PRIMARY}
                     isLoading={formik.isSubmitting}
                     disabled={formik.isSubmitting}
                   >

@@ -7,7 +7,13 @@ import {
   loginWithGoogle,
   loginWithEmailAndPassword,
 } from '@hermes/features/auth';
-import { TextField, Button, GoogleIcon } from '@hermes/components';
+import {
+  TextField,
+  Button,
+  GoogleIcon,
+  ButtonVariant,
+  ButtonSize,
+} from '@hermes/components';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -81,6 +87,8 @@ const Login: NextPage = () => {
               <div className="mt-6">
                 <Button
                   type="submit"
+                  variant={ButtonVariant.PRIMARY}
+                  size={ButtonSize.MEDIUM}
                   disabled={formik.isSubmitting}
                   isLoading={formik.isSubmitting}
                 >
@@ -102,7 +110,8 @@ const Login: NextPage = () => {
           <div className="flex items-center mt-6 -mx-2">
             <Button
               type="button"
-              variant="google"
+              variant={ButtonVariant.GOOGLE}
+              size={ButtonSize.BIG}
               onClick={handleLoginWithGoogle}
             >
               <GoogleIcon />

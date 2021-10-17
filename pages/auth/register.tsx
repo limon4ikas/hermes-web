@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createUser } from '@hermes/features/auth';
-import { TextField, Button } from '@hermes/components';
+import { TextField, Button, ButtonVariant } from '@hermes/components';
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -74,7 +74,7 @@ const Register: NextPage = () => {
 
                 <div className="flex items-center justify-between mt-4">
                   <Button
-                    variant="primary"
+                    variant={ButtonVariant.PRIMARY}
                     type="submit"
                     disabled={formik.isSubmitting}
                     isLoading={formik.isSubmitting}
