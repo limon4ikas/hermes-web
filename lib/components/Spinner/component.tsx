@@ -1,17 +1,17 @@
 import { FC } from 'react';
 
-export enum SPINNER_SIZES {
-  SMALL = 'small',
-  MEDIUM = 'medium',
+export enum SpinnerSizes {
+  Small = 'small',
+  Medium = 'medium',
 }
 
-const sizes: Record<SPINNER_SIZES, string> = {
-  [SPINNER_SIZES.SMALL]: 'h-2 w-2',
-  [SPINNER_SIZES.MEDIUM]: 'h-4 w-4',
+const sizes: Record<SpinnerSizes, string> = {
+  [SpinnerSizes.Small]: 'h-2 w-2',
+  [SpinnerSizes.Medium]: 'h-4 w-4',
 };
 
 export interface SpinnerProps {
-  size?: SPINNER_SIZES | 'medium' | 'small';
+  size?: SpinnerSizes | 'medium' | 'small';
 }
 
 export const Spinner: FC<SpinnerProps> = (props) => {
