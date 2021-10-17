@@ -5,17 +5,19 @@ export enum SpinnerSize {
   MEDIUM = 'medium',
 }
 
+export type SpinnerSizeValue = 'medium' | 'small';
+
 const sizes: Record<SpinnerSize, string> = {
   [SpinnerSize.SMALL]: 'h-2 w-2',
   [SpinnerSize.MEDIUM]: 'h-4 w-4',
 };
 
 export interface SpinnerProps {
-  size?: SpinnerSize;
+  size?: SpinnerSize | SpinnerSizeValue;
 }
 
 export const Spinner: FC<SpinnerProps> = (props) => {
-  const { size = SpinnerSize.MEDIUM } = props;
+  const { size = 'medium' } = props;
 
   return (
     <svg

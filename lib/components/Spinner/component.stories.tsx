@@ -11,5 +11,5 @@ const Template: Story<SpinnerProps> = (args) => <Spinner {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  size: SpinnerSize.MEDIUM,
+  size: 'medium',
 };

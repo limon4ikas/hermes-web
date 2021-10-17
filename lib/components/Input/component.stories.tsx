@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Input, InputProps, InputVariants } from './component';
+import { Input, InputProps } from './component';
 
 export default {
   component: Input,
@@ -12,5 +12,5 @@ const Template: Story<InputProps> = (args) => <Input {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   placeholder: 'Placeholder',
-  variant: InputVariants.PRIMARY,
+  variant: 'primary',
 };
