@@ -1,17 +1,22 @@
 import { FC } from 'react';
 
-export type SpinnerSize = 2 | 4;
+export enum SpinnerSize {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+}
 
 const sizes: Record<SpinnerSize, string> = {
-  2: 'h-2 w-2',
-  4: 'h-4 w-4',
+  [SpinnerSize.SMALL]: 'h-2 w-2',
+  [SpinnerSize.MEDIUM]: 'h-4 w-4',
 };
 
 export interface SpinnerProps {
   size?: SpinnerSize;
 }
 
-export const Spinner: FC<SpinnerProps> = ({ size = 4 }) => {
+export const Spinner: FC<SpinnerProps> = (props) => {
+  const { size = SpinnerSize.MEDIUM } = props;
+
   return (
     <svg
       className={`animate-spin text-button ${sizes[size]}`}

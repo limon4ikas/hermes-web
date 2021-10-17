@@ -1,4 +1,5 @@
 import { Meta, Story } from '@storybook/react';
+import { SpinnerSize } from '.';
 import { Spinner, SpinnerProps } from './component';
 
 export default {
@@ -10,5 +11,5 @@ const Template: Story<SpinnerProps> = (args) => <Spinner {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  size: 4,
+  size: SpinnerSize.MEDIUM,
 };
