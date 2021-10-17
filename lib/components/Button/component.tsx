@@ -1,38 +1,48 @@
-import React, {
-  ButtonHTMLAttributes,
-  ComponentPropsWithRef,
-  DetailedHTMLProps,
-  forwardRef,
-} from 'react';
+import React, { ComponentPropsWithRef, forwardRef } from 'react';
 import { Spinner } from '../Spinner';
 
-type ButtonVariant = 'primary' | 'google';
+export enum ButtonVariant {
+  PRIMARY = 'primary',
+  GOOGLE = 'google',
+}
 
-export const buttonVariants: Record<ButtonVariant, string> = {
-  primary:
-    'px-4 py-2 leading-5 text-white w-full transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none',
-  google:
-    'flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400 focus:outline-none',
+export enum ButtonSize {
+  MEDIUM = 'medium',
+  BIG = 'big',
+}
+
+const buttonSizeMap: Record<ButtonSize, string> = {
+  [ButtonSize.MEDIUM]: 'px-4 py-2',
+  [ButtonSize.BIG]: 'px-6 py-2',
 };
 
-export type ButtonProps = ComponentPropsWithRef<'button'> &
-  DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > & {
-    variant?: ButtonVariant;
-    isLoading?: boolean;
-  };
+export const buttonVariants: Record<ButtonVariant, string> = {
+  [ButtonVariant.PRIMARY]:
+    'leading-5 text-white bg-gray-700 rounded hover:bg-gray-600',
+  [ButtonVariant.GOOGLE]:
+    'mx-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400',
+};
+
+export interface ButtonProps extends ComponentPropsWithRef<'button'> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  isLoading?: boolean;
+}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    { variant = 'primary', isLoading, className = '', children, ...rest },
-    ref
-  ) => {
+  (props, ref) => {
+    const {
+      variant = ButtonVariant.PRIMARY,
+      size = ButtonSize.MEDIUM,
+      isLoading,
+      children,
+      ...rest
+    } = props;
+
     return (
       <button
         {...rest}
-        className={`flex items-center justify-center gap-2 ${buttonVariants[variant]} ${className}`}
+        className={`flex items-center justify-center gap-2 w-full duration-200 transition-colors transform focus:outline-none ${buttonSizeMap[size]} ${buttonVariants[variant]}`}
         ref={ref}
       >
         {children}
