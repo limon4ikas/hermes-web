@@ -7,7 +7,12 @@ module.exports = {
   ],
   darkMode: false, // or 'media' | 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        electric: '#db00ff',
+        ribbon: '#0047ff',
+      },
+    },
   },
   variants: {
     extend: {},

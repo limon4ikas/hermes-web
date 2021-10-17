@@ -1,13 +1,14 @@
 import { FC } from 'react';
+import tw, { TwStyle } from 'twin.macro';
 
 export enum SpinnerSizes {
   Small = 'small',
   Medium = 'medium',
 }
 
-const sizes: Record<SpinnerSizes, string> = {
-  [SpinnerSizes.Small]: 'h-2 w-2',
-  [SpinnerSizes.Medium]: 'h-4 w-4',
+const sizes: Record<SpinnerSizes, TwStyle> = {
+  [SpinnerSizes.Small]: tw`h-2 w-2`,
+  [SpinnerSizes.Medium]: tw`h-4 w-4`,
 };
 
 export interface SpinnerProps {
@@ -19,7 +20,7 @@ export const Spinner: FC<SpinnerProps> = (props) => {
 
   return (
     <svg
-      className={`animate-spin text-button ${sizes[size]}`}
+      css={[tw`animate-spin`, sizes[size]]}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

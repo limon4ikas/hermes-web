@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { AuthProvider } from '@hermes/features/auth';
 import { store } from '@hermes/state';
+import { GlobalStyles } from 'twin.macro';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -12,6 +13,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
+      <GlobalStyles />
       <Provider store={store}>
         <AuthProvider>
           <Component {...pageProps} />
