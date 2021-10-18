@@ -5,13 +5,10 @@ module.exports = {
     './lib/components/**/*.{js,ts,jsx,tsx}',
     './lib/features/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: false, // or 'media' | 'class'
+  darkMode: 'class', // or 'media' | 'class'
   theme: {
     extend: {
-      colors: {
-        electric: '#db00ff',
-        ribbon: '#0047ff',
-      },
+      colors: {},
     },
   },
   variants: {

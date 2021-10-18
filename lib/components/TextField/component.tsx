@@ -1,7 +1,5 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 import { useField, FieldHookConfig } from 'formik';
-import { TextFieldError } from './TextFieldError/TextFieldError';
-import { Label } from '../Label';
 import { Input } from '../Input/component';
 
 export type TextFieldProps = ComponentPropsWithRef<'div'> &
@@ -16,16 +14,21 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 
     return (
       <div ref={ref}>
-        {label && <Label htmlFor={field.name}>{label}</Label>}
+        {label && (
+          <label
+            tw="block mb-2 text-sm text-gray-800 dark:text-gray-200"
+            htmlFor={field.name}
+          >
+            {label}
+          </label>
+        )}
         <Input
           {...field}
           id={field.name}
           type={type}
           placeholder={placeholder}
         />
-        {meta.touched && meta.error && (
-          <TextFieldError>{meta.error}</TextFieldError>
-        )}
+        {meta.touched && meta.error && <p tw="text-red-500">{meta.error}</p>}
       </div>
     );
   }

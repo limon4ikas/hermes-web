@@ -39,7 +39,7 @@ export const ConnectPage: FC = () => {
         </title>
       </Head>
 
-      <div className="flex flex-col items-center justify-center bg-blue-300 h-screen w-screen">
+      <div tw="flex flex-col items-center justify-center bg-blue-300 h-screen w-screen">
         {isLoading && <h1>Connecting to strava...</h1>}
         {isSuccess && (
           <>

@@ -68,7 +68,7 @@ export const LoginPage: FC<LoginPageProps> = () => {
             <div tw="mt-4">
               <TextField name="password" type="password" label="Password" />
               <Link href="/auth/forgot">
-                <a tw="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline">
+                <a tw="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline cursor-pointer">
                   Forgot you password?
                 </a>
               </Link>
@@ -112,7 +112,7 @@ export const LoginPage: FC<LoginPageProps> = () => {
         <p tw="mt-8 text-xs font-light text-center text-gray-400">
           Don&apos;t have an account? <br />
           <Link href="/auth/register">
-            <a tw="font-medium text-gray-800 dark:text-gray-200 hover:underline">
+            <a tw="font-medium text-gray-800 dark:text-gray-200 hover:underline cursor-pointer">
               Create One
             </a>
           </Link>

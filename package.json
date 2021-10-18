@@ -16,7 +16,6 @@
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@reduxjs/toolkit": "^1.6.1",
-    "axios": "^0.22.0",
     "firebase": "^9.0.0",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",

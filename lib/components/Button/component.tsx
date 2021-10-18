@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithRef, forwardRef } from 'react';
+import React, { ComponentPropsWithRef, FC, forwardRef } from 'react';
 import { Spinner } from '../Spinner';
 import tw, { TwStyle } from 'twin.macro';
 
@@ -30,27 +30,25 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   isLoading?: boolean;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
-      variant = ButtonTypes.Primary,
-      size = ButtonSizes.Medium,
-      isLoading,
-      children,
-      ...rest
-    } = props;
+export const Button: FC<ButtonProps> = forwardRef((props, ref) => {
+  const {
+    variant = ButtonTypes.Primary,
+    size = ButtonSizes.Medium,
+    isLoading,
+    children,
+    ...rest
+  } = props;
 
-    return (
-      <button
-        ref={ref}
-        css={[buttonBase, buttonSizeMap[size], buttonTypeMap[variant]]}
-        {...rest}
-      >
-        {children}
-        {isLoading && <Spinner />}
-      </button>
-    );
-  }
-);
+  return (
+    <button
+      ref={ref}
+      css={[buttonBase, buttonSizeMap[size], buttonTypeMap[variant]]}
+      {...rest}
+    >
+      {children}
+      {isLoading && <Spinner />}
+    </button>
+  );
+});
 
 Button.displayName = 'Button';
