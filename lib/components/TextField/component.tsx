@@ -16,7 +16,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       <div ref={ref}>
         {label && (
           <label
-            tw="block mb-2 text-sm text-gray-800 dark:text-gray-200"
+            className="block mb-2 text-sm text-gray-800 dark:text-gray-200"
             htmlFor={field.name}
           >
             {label}
@@ -28,7 +28,9 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           type={type}
           placeholder={placeholder}
         />
-        {meta.touched && meta.error && <p tw="text-red-500">{meta.error}</p>}
+        {meta.touched && meta.error && (
+          <p className="text-red-500">{meta.error}</p>
+        )}
       </div>
     );
   }

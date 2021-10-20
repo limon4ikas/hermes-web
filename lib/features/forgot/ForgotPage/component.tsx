@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import 'twin.macro';
 import { useRouter } from 'next/router';
 import { Form, useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
@@ -33,20 +32,20 @@ export const ForgotPage: FC<ForgotPageProps> = () => {
   });
 
   return (
-    <div tw="flex h-screen items-center justify-center bg-gray-100">
-      <div tw="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <div tw="px-6 py-4">
-          <h2 tw="text-3xl font-bold text-center text-gray-700 dark:text-white">
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <div className="px-6 py-4">
+          <h2 className="text-3xl font-bold text-center text-gray-700 dark:text-white">
             Hermes
           </h2>
 
-          <p tw="mt-1 text-center text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
             Please enter your email and we will send you link to create new
             password
           </p>
           <FormikProvider value={formik}>
             <Form>
-              <div tw="w-full mt-4">
+              <div className="w-full mt-4">
                 <TextField
                   name="email"
                   type="email"
@@ -55,7 +54,7 @@ export const ForgotPage: FC<ForgotPageProps> = () => {
                 />
               </div>
 
-              <div tw="flex items-center justify-between mt-4">
+              <div className="flex items-center justify-between mt-4">
                 <Button
                   type="submit"
                   variant="primary"

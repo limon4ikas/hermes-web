@@ -1,17 +1,18 @@
 import { FC } from 'react';
+import clsx from 'clsx';
 
-export enum SPINNER_SIZES {
+export enum SpinnerSizes {
   SMALL = 'small',
   MEDIUM = 'medium',
 }
 
-const sizes: Record<SPINNER_SIZES, string> = {
-  [SPINNER_SIZES.SMALL]: 'h-2 w-2',
-  [SPINNER_SIZES.MEDIUM]: 'h-4 w-4',
+const sizes: Record<SpinnerSizes, string> = {
+  [SpinnerSizes.SMALL]: 'h-2 w-2',
+  [SpinnerSizes.MEDIUM]: 'h-4 w-4',
 };
 
 export interface SpinnerProps {
-  size?: SPINNER_SIZES | 'medium' | 'small';
+  size?: SpinnerSizes | 'medium' | 'small';
 }
 
 export const Spinner: FC<SpinnerProps> = (props) => {
