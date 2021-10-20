@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef } from 'react';
+import { forwardRef, ComponentPropsWithRef } from 'react';
 import { useField, FieldHookConfig } from 'formik';
 import { Input } from '../Input/component';
 
