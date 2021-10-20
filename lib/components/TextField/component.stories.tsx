@@ -21,4 +21,8 @@ const Template: Story<TextFieldProps> = (args) => (
 );
 
 export const Primary = Template.bind({});
-Primary.args = { label: 'Email', name: 'email', placeholder: 'Email' };
+Primary.args = {
+  label: 'Email',
+  name: 'email',
+  placeholder: 'Email',
+};

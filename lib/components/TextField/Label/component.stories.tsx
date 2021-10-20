@@ -4,7 +4,7 @@ import { Label, LabelProps } from './component';
 
 export default {
   component: Label,
-  title: 'form/base/Base Label',
+  title: 'form/Base Label',
 } as Meta;
 ``;
 
