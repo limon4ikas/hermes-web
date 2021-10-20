@@ -1133,3 +1133,38 @@ Dev App Server is now running.
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[debug] [2021-10-20T09:26:48.543Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[debug] [2021-10-20T09:26:48.547Z] Error: write EIO
+    at afterWriteDispatched (internal/stream_base_commons.js:156:25)
+    at writeGeneric (internal/stream_base_commons.js:147:3)
+    at WriteStream.Socket._writeGeneric (net.js:798:11)
+    at WriteStream.Socket._write (net.js:810:8)
+    at writeOrBuffer (internal/streams/writable.js:358:12)
+    at WriteStream.Writable.write (internal/streams/writable.js:303:10)
+    at Console.log (/usr/local/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at Console.Writable.write (/usr/local/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (events.js:412:35)
+    at DerivedLogger.emit (domain.js:475:12)
+    at addChunk (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+    at readableAddChunk (/usr/local/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:280:11)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[debug] [2021-10-20T09:26:48.551Z] Ignoring signal SIGHUP due to short delay of 8ms
+[debug] [2021-10-20T09:26:48.551Z] [worker-~diagnostic~-10a05b7f-76f7-4c0e-a48f-880f2b58144c]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-10a05b7f-76f7-4c0e-a48f-880f2b58144c]: exited"}}
+[debug] [2021-10-20T09:26:48.551Z] [worker-~diagnostic~-10a05b7f-76f7-4c0e-a48f-880f2b58144c]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-10a05b7f-76f7-4c0e-a48f-880f2b58144c]: FINISHED"}}
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  functions: Stopping Functions Emulator {"metadata":{"emulator":{"name":"functions"},"message":"Stopping Functions Emulator"}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2021-10-20T09:26:48.561Z] *** shutting down gRPC server since JVM is shutting down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n"}}
+[debug] [2021-10-20T09:26:48.590Z] *** server shut down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down\n"}}
