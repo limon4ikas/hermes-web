@@ -8,7 +8,6 @@ import { DefaultPageShell } from '../DefaultPageShell';
 interface WithAuthHOCConfig {
   redirectURL?: string;
   PageShell?: ReactNode;
-  enablePageShell?: boolean;
 }
 
 const DEFAULT_REDIRECT_URL = '/auth/login';

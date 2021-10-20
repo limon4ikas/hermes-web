@@ -1,7 +1,6 @@
-import React, { ComponentPropsWithRef, forwardRef } from 'react';
-import { TailwindCSS } from '@hermes/types';
+import React, { ComponentPropsWithRef, FC, forwardRef } from 'react';
 import { Spinner } from '../Spinner';
-import clsx from 'clsx';
+import tw, { TwStyle } from 'twin.macro';
 
 export enum ButtonTypes {
   Primary = 'primary',
@@ -13,16 +12,16 @@ export enum ButtonSizes {
   Big = 'big',
 }
 
-const buttonSizeMap: Record<ButtonSizes, TailwindCSS> = {
-  [ButtonSizes.Medium]: 'px-4 py-2',
-  [ButtonSizes.Big]: 'px-6 py-2',
+const buttonBase = tw`flex items-center justify-center gap-2 w-full transition-colors transform focus:outline-none`;
+
+const buttonSizeMap: Record<ButtonSizes, TwStyle> = {
+  [ButtonSizes.Medium]: tw`px-4 py-2`,
+  [ButtonSizes.Big]: tw`px-6 py-2`,
 };
 
-export const buttonTypeMap: Record<ButtonTypes, TailwindCSS> = {
-  [ButtonTypes.Primary]:
-    'leading-5 text-white bg-gray-700 rounded hover:bg-gray-600',
-  [ButtonTypes.Google]:
-    'mx-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400',
+export const buttonTypeMap: Record<ButtonTypes, TwStyle> = {
+  [ButtonTypes.Primary]: tw`leading-5 text-white bg-gray-700 rounded hover:bg-gray-600`,
+  [ButtonTypes.Google]: tw`mx-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400`,
 };
 
 export interface ButtonProps extends ComponentPropsWithRef<'button'> {
@@ -31,31 +30,25 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   isLoading?: boolean;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (props, ref) => {
-    const {
-      variant = ButtonTypes.Primary,
-      size = ButtonSizes.Medium,
-      isLoading,
-      children,
-      ...rest
-    } = props;
+export const Button: FC<ButtonProps> = forwardRef((props, ref) => {
+  const {
+    variant = ButtonTypes.Primary,
+    size = ButtonSizes.Medium,
+    isLoading,
+    children,
+    ...rest
+  } = props;
 
-    return (
-      <button
-        ref={ref}
-        className={clsx(
-          'flex items-center justify-center gap-2 w-full duration-200 transition-colors transform focus:outline-none',
-          buttonSizeMap[size],
-          buttonTypeMap[variant]
-        )}
-        {...rest}
-      >
-        {children}
-        {isLoading && <Spinner />}
-      </button>
-    );
-  }
-);
+  return (
+    <button
+      ref={ref}
+      css={[buttonBase, buttonSizeMap[size], buttonTypeMap[variant]]}
+      {...rest}
+    >
+      {children}
+      {isLoading && <Spinner />}
+    </button>
+  );
+});
 
 Button.displayName = 'Button';

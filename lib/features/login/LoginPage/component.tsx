@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { MouseEvent, useEffect } from 'react';
+import { FC, MouseEvent, useEffect } from 'react';
+import 'twin.macro';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
@@ -9,6 +9,7 @@ import {
 import { TextField, Button, GoogleIcon } from '@hermes/components';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
+import 'twin.macro';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -56,24 +57,24 @@ export const LoginPage: FC<LoginPageProps> = () => {
   });
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-        <h1 className="text-3xl font-semibold text-center text-gray-700 dark:text-white">
+    <div tw="flex h-screen items-center justify-center bg-gray-100">
+      <div tw="w-full max-w-sm p-6 m-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+        <h1 tw="text-3xl font-semibold text-center text-gray-700 dark:text-white">
           Hermes
         </h1>
         <FormikProvider value={formik}>
-          <Form className="mt-6">
+          <Form tw="mt-6">
             <TextField name="email" label="Email" type="text" />
-            <div className="mt-4">
+            <div tw="mt-4">
               <TextField name="password" type="password" label="Password" />
               <Link href="/auth/forgot">
-                <a className="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline">
+                <a tw="mt-2 flex justify-end text-xs font-light text-gray-400 hover:text-gray-500 hover:underline cursor-pointer">
                   Forgot you password?
                 </a>
               </Link>
             </div>
 
-            <div className="mt-6">
+            <div tw="mt-6">
               <Button
                 type="submit"
                 variant="primary"
@@ -86,17 +87,17 @@ export const LoginPage: FC<LoginPageProps> = () => {
             </div>
           </Form>
         </FormikProvider>
-        <div className="flex items-center justify-between mt-4">
-          <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
+        <div tw="flex items-center justify-between mt-4">
+          <span tw="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
 
-          <p className="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
+          <p tw="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
             or login with Social Media
           </p>
 
-          <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
+          <span tw="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
         </div>
 
-        <div className="flex items-center mt-6 -mx-2">
+        <div tw="flex items-center mt-6 -mx-2">
           <Button
             type="button"
             variant="google"
@@ -104,14 +105,14 @@ export const LoginPage: FC<LoginPageProps> = () => {
             onClick={handleLoginWithGoogle}
           >
             <GoogleIcon />
-            <span className="hidden mx-2 sm:inline">Sign in with Google</span>
+            <span tw="hidden mx-2 sm:inline">Sign in with Google</span>
           </Button>
         </div>
 
-        <p className="mt-8 text-xs font-light text-center text-gray-400">
+        <p tw="mt-8 text-xs font-light text-center text-gray-400">
           Don&apos;t have an account? <br />
           <Link href="/auth/register">
-            <a className="font-medium text-gray-800 dark:text-gray-200 hover:underline">
+            <a tw="font-medium text-gray-800 dark:text-gray-200 hover:underline cursor-pointer">
               Create One
             </a>
           </Link>
