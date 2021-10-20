@@ -3,7 +3,19 @@ import '../styles/globals.css';
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   layout: 'centered',
-  backgrounds: {},
+  backgrounds: {
+    default: 'light',
+    values: [
+      {
+        name: 'light',
+        value: '#e4e7eb',
+      },
+      {
+        name: 'dark',
+        value: '#374151',
+      },
+    ],
+  },
   controls: { expanded: true },
   options: {
     storySort: (a, b) => {

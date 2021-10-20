@@ -3,9 +3,13 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { AuthProvider } from '@hermes/features/auth';
 import { store } from '@hermes/state';
+import { AppPropsWithLayout } from '@hermes/types/page';
 import '../styles/globals.css';
+import { Layout } from '@hermes/features/Layout';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
+
   return (
     <>
       <Head>
@@ -13,9 +17,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
 
       <Provider store={store}>
-        <AuthProvider>
-          <Component {...pageProps} />
-        </AuthProvider>
+        <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
       </Provider>
     </>
   );

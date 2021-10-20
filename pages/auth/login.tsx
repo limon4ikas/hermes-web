@@ -1,8 +1,9 @@
-import type { NextPage } from 'next';
+import React, { ReactElement } from 'react';
 import Head from 'next/head';
 import { LoginPage } from '@hermes/features/login';
+import { NextPageWithLayout } from '@hermes/types/page';
 
-const Login: NextPage = () => {
+const Login: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -15,3 +16,11 @@ const Login: NextPage = () => {
 };
 
 export default Login;
+
+Login.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <div className="flex items-center justify-center h-screen w-screen">
+      {page}
+    </div>
+  );
+};

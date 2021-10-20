@@ -39,7 +39,7 @@ export const RegisterPage: FC<RegisterPageProps> = () => {
   });
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
+    <div className="flex w-full items-center justify-center">
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="px-6 py-4">
           <h2 className="text-3xl font-bold text-center text-gray-700 dark:text-white">
@@ -51,24 +51,35 @@ export const RegisterPage: FC<RegisterPageProps> = () => {
           <FormikProvider value={formik}>
             <Form>
               <div className="w-full mt-4">
-                <TextField name="email" label="Email" type="text" />
+                <TextField
+                  name="email"
+                  label="Email"
+                  placeholder="Email"
+                  type="text"
+                />
               </div>
 
               <div className="w-full mt-4">
-                <TextField name="password" label="Password" type="password" />
+                <TextField
+                  name="password"
+                  label="Password"
+                  placeholder="Password"
+                  type="password"
+                />
               </div>
 
               <div className="w-full mt-4">
                 <TextField
                   name="repeatedPassword"
                   label="Repeat password"
+                  placeholder="Password"
                   type="password"
                 />
               </div>
 
               <div className="flex items-center justify-between mt-4">
                 <Button
-                  variant="primary"
+                  variant="login"
                   type="submit"
                   disabled={formik.isSubmitting}
                   isLoading={formik.isSubmitting}

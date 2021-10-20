@@ -1,14 +1,13 @@
 module.exports = {
   mode: 'jit',
-  purge: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './lib/components/**/*.{js,ts,jsx,tsx}',
-    './lib/features/**/*.{js,ts,jsx,tsx}',
-  ],
-  darkMode: 'class', // or 'media' | 'class'
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './lib/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'media', // or 'media' | 'class'
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        body: '#e4e7eb',
+        'body-dark': '#374151',
+      },
     },
   },
   variants: {
