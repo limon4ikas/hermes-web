@@ -4,7 +4,7 @@ import { Input } from '../Input/component';
 
 export type TextFieldProps = ComponentPropsWithRef<'div'> &
   FieldHookConfig<string> & {
-    label: string;
+    label?: string;
   };
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
@@ -14,12 +14,14 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
 
     return (
       <div ref={ref}>
-        <label
-          className="block mb-1 text-sm text-gray-800 dark:text-gray-200"
-          htmlFor={field.name}
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            className="block mb-1 text-sm text-gray-800 dark:text-gray-200"
+            htmlFor={field.name}
+          >
+            {label}
+          </label>
+        )}
         <Input
           {...field}
           id={field.name}
